@@ -1,0 +1,508 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="菜狗的博客，欢迎各位大佬与我交流!">
+  <meta name="author" content="Do1phln">
+  <meta name="keywords" content="">
+  <meta name="description" content="本文节选自《 Wireshark 网络分析就是那么简单》一书，这一段写得很有感触，故在此摘抄。  文：林沛满 当我在台灯下写到这一篇时，不由得想到几个月后，另一束灯光下的读者正翻到这一页，跨越时空的交流真是奇妙。我要感谢你购买本书并坚持读到这里。作为小众图书的作者，我最珍视的是读者对本书内容的喜爱，也希望你在阅读中有所收获。最后一篇，就让我们忘记那些乏味的术语，谈些有趣一点的话题吧。 关于技术，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【摘录】一个技术男的自白">
+<meta property="og:url" content="https://www.0error.net/2021/06/156af401.html">
+<meta property="og:site_name" content="学习备用录">
+<meta property="og:description" content="本文节选自《 Wireshark 网络分析就是那么简单》一书，这一段写得很有感触，故在此摘抄。  文：林沛满 当我在台灯下写到这一篇时，不由得想到几个月后，另一束灯光下的读者正翻到这一页，跨越时空的交流真是奇妙。我要感谢你购买本书并坚持读到这里。作为小众图书的作者，我最珍视的是读者对本书内容的喜爱，也希望你在阅读中有所收获。最后一篇，就让我们忘记那些乏味的术语，谈些有趣一点的话题吧。 关于技术，">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-16T07:26:44.000Z">
+<meta property="article:modified_time" content="2021-06-16T07:28:48.330Z">
+<meta property="article:author" content="Do1phln">
+<meta property="article:tag" content="摘录">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>【摘录】一个技术男的自白 - 学习备用录</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.0error.net","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"bad56014d4869a580f4ebb27cf549354","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Do1phln&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="【摘录】一个技术男的自白">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-16 15:26" pubdate>
+        2021年6月16日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      全文共有 2.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      阅读全文预计需要 8 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">【摘录】一个技术男的自白</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年6月16日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>本文节选自<code>《 Wireshark 网络分析就是那么简单》</code>一书，这一段写得很有感触，故在此摘抄。</p>
+</blockquote>
+<p><strong>文：林沛满</strong></p>
+<p>当我在台灯下写到这一篇时，不由得想到几个月后，另一束灯光下的读者正翻到这一页，跨越时空的交流真是奇妙。我要感谢你购买本书并坚持读到这里。作为小众图书的作者，我最珍视的是读者对本书内容的喜爱，也希望你在阅读中有所收获。最后一篇，就让我们忘记那些乏味的术语，谈些有趣一点的话题吧。</p>
+<p>关于技术，当下的热点是Full Stack Engineer，翻译过来就是全栈工程师。我的理解就是从前端到后端，从软件到硬件都懂的通才。其实在全栈的概念出现之前，关于技术广度和深度的讨论就从来没有停止过。在时间有限的情况下，究竟是应该扩展广度，各种技术都去涉猎，还是把所有精力都投入在一门技术上呢？我个人更倾向于后者，因为当某项技术学到了较深的程度后，眼界就不一样了，再学其他的技术也容易达到类似境界。以本书提到的协议为例，如果你已经精通CIFS，那很可能稍加点拨就能完全理解NFS；同样如果你理解了网络的分层和流控，再学习存储的层次和缓存也比较容易。但假如一个人连最擅长的技术都浅尝辄止，那学习其他技术也会停留在表面上。我有位技术出色的朋友用过一个生动的比喻来说明这个问题：技术深度和广度的关系，就像登山时的高度和视野。假如你爬到半山腰就停下来眺望，就只能看到一半的视野；但如果埋头爬到山顶，一抬头便是无边的风景。</p>
+<p>关于薪水，是很多工程师自怨自艾的口水话题。不知道从何时开始，大家似乎都觉得自己被亏待了。微博上流传各种自嘲的段子，比如“今天你编程时流的汗，就是当初填志愿时脑子进的水”；我也曾经开玩笑说自己的英文名是“Low Payman”；我有位年薪40多万的同事，MSN签名是“少壮不努力，老大干IT”；还有一种流行的说法，认为在中国不适合走技术路线，否则为什么在国外才有白发苍苍的老工程师？看过太多类似段子之后，我觉得这种群体心态已经有点矫情了。无论在什么国家，工程师都排不上收入最高的群体。相比国外，中国工程师地位已经算高了，比如美国工程师的收入就完全比不上律师和医生等职业，但在中国就未必是这样。中国也不是没有老工程师的发展空间，而是因为第一批工程师还没有变老。热爱自嘲的人其实也心知肚明—他们的薪水完全足以维持体面的生活，比如那位“少壮不努力”的同学，一直在上海这个大染缸过着纸醉金迷的日子。而真正徒伤悲的职业，恐怕根本没有心情自我编排……我认为自嘲是一种难得的幽默，但是当一个群体的自嘲都专注在薪水上，听上去就有点无聊。</p>
+<p>关于办公室政治，那真不是属于我们的战场。孟子的“劳心者治人，劳力者治于人”对中国影响太过深远，我不止一位朋友从技术路线改走管理路线的时候，以这句话作为座右铭。而在我看来，自从人类进化到可以坐在办公室里“劳力”之后，“劳心”就缺乏吸引力了。人类比电脑狡诈太多，还是管电脑省心。我们就把办公室政治这样劳心的活儿留给走管理路线的同事吧，只要不站队不说是非，用技术帮助所有人，自然会成为单位里最受尊敬的人。</p>
+<p>关于创业，我想没有哪个行业比IT界更热衷于此了。或许是因为这一行有过太多轻易成功的故事，所以工程师们蠢蠢欲动，仿佛每个人都在想，连一个毫无技术含量的导航网站都能被高价收购，满腹才华的我能干出怎样惊天动地的事业？于是有志者开始对职业不满，觉得无论如何应该出去闯闯，寻找自己被封印的灵魂，他们振臂一挥，豪气万丈地说“走，创业去！”其实我个人是非常羡慕这样充满激情的人生的，无奈看过太多失败的例子，总觉得创业的成功率被高估。有位朋友到福建承包一片山林之后，很快发现这东西并没有想象中那么赚钱。终于在花光所有积蓄之后，萌发了“不如归去”的念头。虽然听上去颇有禅意，其实心里还是很懊悔的，最后不仅回到原来公司，还坐到原来的位子上。当然成功者也是有的，不要妒嫉他们，因为这是冒着风险得到的。</p>
+<p>关于跳槽，除了印度之外，我还没有见过比中国工程师更爱跳槽的群体。由于每跳槽一次基本能加薪30%，的确让人难以淡定地呆在一个岗位上。不过在我看来，频繁跳槽所付出的代价恐怕高于这点收益，因为很快就会发现无处可跳了。而且更大的副作用是，多次换工作导致了各种技术都只学到皮毛，等醒悟过来已经晚了。如果某个新职位吸引你的亮点只是加薪，我建议三思而行。</p>
+<p>关于理科生的骄傲，在工程师群体中，有小部分年轻人至今还保持着源自高中理科班的自豪感。比如看到一本精彩的科幻小说，便觉得文科生不可能懂；如果新来的领导不是理工科出身，就感叹所处的并非技术驱动型公司；最让我吃惊的一次，是一位DBA质疑不懂技术的销售人员为什么地位那么高。这种错误的认知显然源于交际圈子的狭隘，对非技术人员的能力缺乏了解。其实你在调试代码时，他们同样在推敲文案；你在餐桌上只管品菜海侃，他们却要左右逢源，让所有宾客感到满意；你结交朋友只看心情喜好，他们在朋友圈里只说“正确”的话，永远如沐春风地倾听；你在内部会议上发言都显拘谨，他们面对突如其来的话筒也能侃侃而谈……毫无疑问，非技术工作的“技术含量”一点都不低。幸好随着阅历的增长，大多数理科生都能改掉这个毛病。</p>
+<p>关于生活，IT男们已经被打上了太多标签：宅、木讷、生活简单。这当然是一种偏见，至少我身边的朋友就不是这样。不过比起国外的工程师群体，我们的业余生活似乎是单调了些。比如与我合作多年的国外同事中，有组乐队的、当冰球教练的、玩帆船的、DIY花园的……有些朋友对此羡慕不已，以为发达国家才玩得起多样化的娱乐，对此我不敢苟同。比如中国学习乐器的人数早就全球第一，在我屈指可数的女同事中，至少有三位在小时候考过钢琴十级。我所住的小区一楼都配有朝南的大院子，园艺条件极佳，只是户户都铺砖硬化了……所以细想起来，经济上并不是主因，只是不够热情罢了。工程师本来就是最擅长DIY的群体，只要行动起来，完全可以让业余生活更加丰富，成为一个更加有趣的人。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%91%98%E5%BD%95/">摘录</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/06/41baec4d.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【每日一题】LeetCode 401.二进制手表(二进制知识的复习)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/5b8c955f.html">
+                        <span class="hidden-mobile">CISCN2021东北赛区-Maple_root-WriteUp</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-copyright"></i> <a href="https://www.0error.net" target="_blank" rel="nofollow noopener"><span>Do1phln 2017 - 2021</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        陇ICP备2021000723号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+            
+            <span>申办中</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?bad56014d4869a580f4ebb27cf549354";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

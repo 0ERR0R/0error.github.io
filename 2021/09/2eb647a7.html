@@ -1,0 +1,524 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="菜狗的博客，欢迎各位大佬与我交流!">
+  <meta name="author" content="Do1phln">
+  <meta name="keywords" content="">
+  <meta name="description" content="顺序表48821234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798991001">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【锐格】数据结构-线性表">
+<meta property="og:url" content="https://www.0error.net/2021/09/2eb647a7.html">
+<meta property="og:site_name" content="学习备用录">
+<meta property="og:description" content="顺序表48821234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798991001">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-21T03:11:21.000Z">
+<meta property="article:modified_time" content="2021-09-21T08:59:47.593Z">
+<meta property="article:author" content="Do1phln">
+<meta property="article:tag" content="C">
+<meta property="article:tag" content="锐格">
+<meta property="article:tag" content="链表">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>【锐格】数据结构-线性表 - 学习备用录</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.0error.net","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"bad56014d4869a580f4ebb27cf549354","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Do1phln&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="【锐格】数据结构-线性表">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-21 11:11" pubdate>
+        2021年9月21日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      全文共有 12k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      阅读全文预计需要 38 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">【锐格】数据结构-线性表</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年9月21日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="顺序表"><a href="#顺序表" class="headerlink" title="顺序表"></a>顺序表</h2><h4 id="4882"><a href="#4882" class="headerlink" title="4882"></a>4882</h4><figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> defaultSize = <span class="hljs-number">10</span>;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SeqList</span> &#123;</span><br><span class="hljs-keyword">protected</span>:<br>    <span class="hljs-keyword">int</span> *data;<br>    <span class="hljs-keyword">int</span> maxSize; <span class="hljs-comment">//表最大可容纳项数</span><br>	<span class="hljs-keyword">int</span> last; <span class="hljs-comment">//当前表大小</span><br><span class="hljs-keyword">public</span>:<br>	SeqList(<span class="hljs-keyword">int</span> sz = defaultSize);<br>	SeqList(SeqList &amp;l);<br>	~SeqList();<br>	<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">Length</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span>; <span class="hljs-comment">//计算表长度</span><br>	<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getData</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> <span class="hljs-keyword">const</span></span>; <span class="hljs-comment">//取第i歌表项的值，存放在x中</span><br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setData</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> x)</span></span>;<br>	<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Insert</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> x)</span></span>; <span class="hljs-comment">//插入x在第i歌表项之后</span><br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Remove</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span></span>;<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">output</span><span class="hljs-params">()</span></span>; <span class="hljs-comment">// 输出顺序表</span><br>&#125;;<br><br>SeqList::SeqList(<span class="hljs-keyword">int</span> sz)<br>&#123;<br>	<span class="hljs-keyword">if</span> (sz&gt;<span class="hljs-number">0</span>) &#123;<br>		maxSize = sz;<br>		last = <span class="hljs-number">-1</span>;<br>		data = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[maxSize];<br>		<span class="hljs-keyword">if</span> (data == <span class="hljs-literal">NULL</span>)<br>			<span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);<br>	&#125;<br>&#125;<br><br>SeqList::~SeqList()<br>&#123;<br>	<span class="hljs-keyword">delete</span> []data;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">SeqList::Length</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">return</span> last+<span class="hljs-number">1</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">SeqList::getData</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> <span class="hljs-keyword">const</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">return</span> data[i];<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SeqList::setData</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> x)</span></span><br><span class="hljs-function"></span>&#123;<br>	data[i] = x;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">SeqList::Insert</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> x)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span> (last == maxSize<span class="hljs-number">-1</span>)<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	<span class="hljs-keyword">if</span> (i&lt;<span class="hljs-number">0</span>||i&gt;last+<span class="hljs-number">1</span>)<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	<span class="hljs-keyword">int</span> j;<br>	<span class="hljs-keyword">for</span> (j=last;j&gt;=i;j--)<br>		data[j+<span class="hljs-number">1</span>] = data[j];<br>	data[i] = x;<br>	last++;<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SeqList::Remove</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">int</span> j;<br>	<span class="hljs-keyword">for</span> (j=i;j&lt;=last<span class="hljs-number">-1</span>;j++)<br>		data[j] = data[j+<span class="hljs-number">1</span>];<br>	last--;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SeqList::output</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">int</span> i;<br>	<span class="hljs-keyword">for</span> (i=<span class="hljs-number">0</span>;i&lt;=last;i++)<br>		<span class="hljs-built_in">cout</span> &lt;&lt; data[i] &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;<br>	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>&#125;<br><br><span class="hljs-comment">//write your code here</span><br><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">int</span> n,m,i,x;<br>	<span class="hljs-built_in">cin</span> &gt;&gt; n &gt;&gt; m;<span class="hljs-comment">//输入两个表的长度</span><br>	<span class="hljs-function">SeqList <span class="hljs-title">l1</span><span class="hljs-params">(n)</span>,<span class="hljs-title">l2</span><span class="hljs-params">(m)</span></span>;<br>	<span class="hljs-keyword">for</span> (i=<span class="hljs-number">0</span>;i&lt;n;i++) &#123;<br>		<span class="hljs-built_in">cin</span> &gt;&gt; x;<br>		l1.Insert(i,x);<span class="hljs-comment">//list1</span><br>	&#125;<br>	<span class="hljs-keyword">for</span> (i=<span class="hljs-number">0</span>;i&lt;m;i++) &#123;<br>		<span class="hljs-built_in">cin</span> &gt;&gt; x;<br>		l2.Insert(i,x);<span class="hljs-comment">//list2</span><br>	&#125;<br>	<span class="hljs-comment">//write your code here</span><br>    <span class="hljs-keyword">int</span> len=min(n, m);<br>    <span class="hljs-keyword">int</span> cnt=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;len;i++)<br>    &#123;<br>        <span class="hljs-keyword">if</span>(l1.getData(<span class="hljs-number">0</span>)==l2.getData(<span class="hljs-number">0</span>))<br>        &#123;<br>            <span class="hljs-built_in">cout</span>&lt;&lt;l1.getData(<span class="hljs-number">0</span>)&lt;&lt;<span class="hljs-string">&quot; &quot;</span>;<br>            cnt++;<br>            l1.Remove(<span class="hljs-number">0</span>);<br>            l2.Remove(<span class="hljs-number">0</span>);<br>        &#125;<br>    &#125;<br>    <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>    <span class="hljs-keyword">if</span>(l1.Length()==<span class="hljs-number">0</span> &amp;&amp; l2.Length()==<span class="hljs-number">0</span>)<br>    &#123;<br>        <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;=&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>    &#125;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(l1.Length()&lt;=<span class="hljs-number">0</span> || l1.getData(<span class="hljs-number">0</span>)&lt;l2.getData(<span class="hljs-number">0</span>))<br>    &#123;<br>        <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;&lt;&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>    &#125;<br>    <span class="hljs-keyword">else</span><br>    &#123;<br>        <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&quot;&gt;&quot;</span>&lt;&lt;<span class="hljs-built_in">endl</span>;<br>    &#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="4314"><a href="#4314" class="headerlink" title="4314"></a>4314</h4><p>这个merge方式用for循环思索了很久还是觉得很难实现，只好用while代替之了</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAXSIZE 100</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> TRUE 1</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> FALSE 0</span><br><br><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> Status;<br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">SeqList</span>&#123;</span><br>    <span class="hljs-keyword">int</span> data[MAXSIZE];<br>    <span class="hljs-keyword">int</span> last; <span class="hljs-comment">//当前表大小</span><br>&#125;SeqList, *pSeqList;<br><br><span class="hljs-function"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> <span class="hljs-title">Length</span><span class="hljs-params">(<span class="hljs-keyword">const</span> pSeqList l)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> l-&gt;last+<span class="hljs-number">1</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getData</span><span class="hljs-params">(<span class="hljs-keyword">const</span> pSeqList l, <span class="hljs-keyword">int</span> i)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">return</span> l-&gt;data[i];<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setData</span><span class="hljs-params">(pSeqList l, <span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> x)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span>(i &gt;= <span class="hljs-number">0</span> &amp;&amp; i &lt;= l-&gt;last)<br>		l-&gt;data[i] = x;<br>&#125;<br><br><span class="hljs-function">Status <span class="hljs-title">Insert</span><span class="hljs-params">(pSeqList l, <span class="hljs-keyword">int</span> i, <span class="hljs-keyword">int</span> x)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// write your code here</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j=l-&gt;last;j&gt;=i;j--)<br>        l-&gt;data[j+<span class="hljs-number">1</span>] = l-&gt;data[j];<br>	l-&gt;data[i] = x;<br>	l-&gt;last++;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">output</span><span class="hljs-params">(<span class="hljs-keyword">const</span> SeqList l)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">int</span> i;<br>	<span class="hljs-keyword">for</span> (i=<span class="hljs-number">0</span>;i&lt;=l.last;i++)<br>	&#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>, l.data[i]);<br>	&#125;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">mergeSeqList</span><span class="hljs-params">(<span class="hljs-keyword">const</span> pSeqList l1,<span class="hljs-keyword">const</span> pSeqList l2, pSeqList l)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// write your code here</span><br>    <span class="hljs-keyword">int</span> len, cnt1=<span class="hljs-number">0</span>, cnt2=<span class="hljs-number">0</span>;<br>    len=Length(l1)+Length(l2);<br>    <span class="hljs-keyword">int</span> l1v=getData(l1, cnt1), l2v=getData(l2, cnt2);<br>    <span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span>(cnt1&lt; Length(l1) &amp;&amp; cnt2&lt;Length(l2))<br>    &#123;<br>        <span class="hljs-keyword">if</span>(l1v &lt;= l2v)<br>        &#123;<br>            Insert(l, i++, l1v);<br>            l1v=getData(l1, ++cnt1);<br>        &#125;<br>        <span class="hljs-keyword">else</span><br>        &#123;<br>            Insert(l, i++, l2v);<br>            l2v=getData(l2, ++cnt2);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">if</span>(cnt1&lt;Length(l1))<br>        <span class="hljs-keyword">while</span>(i&lt;len)<br>        &#123;<br>            Insert(l, i++, l1v);<br>            l1v=getData(l1, ++cnt1);<br>        &#125;<br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-keyword">while</span>(i&lt;len)<br>        &#123;<br>            Insert(l, i++, l2v);<br>            l2v=getData(l2, ++cnt2);<br>        &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">int</span> n,m,i,x;<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;n);<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;m);<br>	SeqList l1, l2;<br>	l1.last = <span class="hljs-number">-1</span>;<br>	l2.last = <span class="hljs-number">-1</span>;<br>	<span class="hljs-keyword">for</span> (i=<span class="hljs-number">0</span>;i&lt;n;i++) &#123;<br>		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;x);<br>		Insert(&amp;l1, i, x);<br>	&#125;<br>	<span class="hljs-keyword">for</span> (i=<span class="hljs-number">0</span>;i&lt;m;i++) &#123;<br>		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;x);<br>		Insert(&amp;l2, i, x);<br>	&#125;<br>	SeqList l;<br>	l.last = <span class="hljs-number">-1</span>;<br>	mergeSeqList(&amp;l1,&amp;l2,&amp;l);<br>	output(l);<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="4880"><a href="#4880" class="headerlink" title="4880"></a>4880</h4><blockquote>
+<p>正确输出：4 9 6 2 7</p>
+<p>我的输出：4 6 2 7 9</p>
+</blockquote>
+<p>但是样例上面写的又和我一致，就很迷惑:clown_face:</p>
+<hr>
+<p>破案了，样例给错了，正确样例应该是数据里面的，还有主函数里面调用函数需要自己去调整顺序…这锐格真的让人迷惑</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> defaultSize = <span class="hljs-number">10</span>;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SeqList</span> &#123;</span><br><span class="hljs-keyword">protected</span>:<br>    <span class="hljs-keyword">int</span> *data;<br>    <span class="hljs-keyword">int</span> maxSize; <span class="hljs-comment">//表最大可容纳项数</span><br>	<span class="hljs-keyword">int</span> last; <span class="hljs-comment">//当前表大小</span><br><span class="hljs-keyword">public</span>:<br>	SeqList(<span class="hljs-keyword">int</span> sz = defaultSize);<br>	~SeqList();<br>	<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">Length</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span>; <span class="hljs-comment">//计算表长度</span><br>	<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getData</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> <span class="hljs-keyword">const</span></span>; <span class="hljs-comment">//取第i歌表项的值，存放在x中</span><br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setData</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> x)</span></span>;<br>	<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Insert</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> &amp;x)</span></span>; <span class="hljs-comment">//插入x在第i歌表项之后</span><br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Remove</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span></span>;<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DeleteAllx</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>;<br>	<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">deleteMin</span><span class="hljs-params">()</span></span>;<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">deleteDuplication</span><span class="hljs-params">()</span></span>;<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">output</span><span class="hljs-params">()</span></span>; <span class="hljs-comment">// 输出顺序表</span><br>&#125;;<br><br>SeqList::SeqList(<span class="hljs-keyword">int</span> sz)<br>&#123;<br>	<span class="hljs-keyword">if</span> (sz&gt;<span class="hljs-number">0</span>) &#123;<br>		maxSize = sz;<br>		last = <span class="hljs-number">-1</span>;<br>		data = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[maxSize];<br>		<span class="hljs-keyword">if</span> (data == <span class="hljs-literal">NULL</span>)<br>			<span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);<br>	&#125;<br>&#125;<br><br>SeqList::~SeqList()<br>&#123;<br>	<span class="hljs-keyword">delete</span> []data;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">SeqList::Length</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">return</span> last+<span class="hljs-number">1</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">SeqList::getData</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> <span class="hljs-keyword">const</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">return</span> data[i];<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SeqList::setData</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> x)</span></span><br><span class="hljs-function"></span>&#123;<br>	data[i] = x;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">SeqList::Insert</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> &amp;x)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span> (last == maxSize<span class="hljs-number">-1</span>)<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	<span class="hljs-keyword">if</span> (i&lt;<span class="hljs-number">0</span>||i&gt;last+<span class="hljs-number">1</span>)<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	<span class="hljs-keyword">int</span> j;<br>	<span class="hljs-keyword">for</span> (j=last;j&gt;=i;j--)<br>		data[j+<span class="hljs-number">1</span>] = data[j];<br>	data[i] = x;<br>	last++;<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SeqList::Remove</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">int</span> j;<br>	<span class="hljs-keyword">for</span> (j=i;j&lt;=last;j++)<br>		data[j] = data[j+<span class="hljs-number">1</span>];<br>	last--;<br>&#125;<br><br><span class="hljs-comment">//write your code here</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SeqList::DeleteAllx</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;=last;i++)<br>    &#123;<br>        <span class="hljs-keyword">if</span>(getData(i)==x)<br>            Remove(i--);<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SeqList::deleteDuplication</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;=last;i++)<br>    &#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=i+<span class="hljs-number">1</span>;j&lt;=last;j++)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(getData(i) == getData(j))<br>            &#123;<br>                Remove(j--);<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">SeqList::deleteMin</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">int</span> mininum=<span class="hljs-number">99999</span>, idx=<span class="hljs-number">-1</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;=last;i++)<br>    &#123;<br><br>        <span class="hljs-keyword">if</span>(getData(i)&lt;mininum)<br>        &#123;<br>            mininum=getData(i);<br>            idx=i;<br>        &#125;<br>    &#125;<br>    data[idx]=data[last];<br>    last--;<br>    <span class="hljs-keyword">return</span> mininum;<br>&#125;<br><br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SeqList::output</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;=last;i++)<br>		<span class="hljs-built_in">cout</span> &lt;&lt; data[i] &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;<br>	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">int</span> n,i,x;<br>	<span class="hljs-built_in">cin</span> &gt;&gt; n;<br>	<span class="hljs-function">SeqList <span class="hljs-title">l</span><span class="hljs-params">(n)</span></span>;<br>	<span class="hljs-keyword">for</span> (i=<span class="hljs-number">0</span>;i&lt;n;i++) &#123;<br>		<span class="hljs-built_in">cin</span> &gt;&gt; x;<br>		l.Insert(i,x);<br>	&#125;<br>	l.deleteDuplication();<br>	l.DeleteAllx(<span class="hljs-number">3</span>);<br>	l.deleteMin();<br>	l.output();<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-comment">//3 4 1 6 4 2 4 7 3 1 2 4 6 6 9</span><br><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h4 id="4312"><a href="#4312" class="headerlink" title="4312"></a>4312</h4><p>这题思路想出来以后兴奋了一下，每逢会意便欣然忘食</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAXSIZE 100</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> TRUE 1</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> FALSE 0</span><br><br><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> Status;<br><br><span class="hljs-keyword">int</span> data[MAXSIZE];<br><span class="hljs-keyword">int</span> last = <span class="hljs-number">-1</span>; <span class="hljs-comment">//当前表大小</span><br><br><span class="hljs-function"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> <span class="hljs-title">Length</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> last+<span class="hljs-number">1</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getData</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span></span><br><span class="hljs-function"></span>&#123;<br>    	<span class="hljs-keyword">return</span> data[i];<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setData</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> x)</span></span><br><span class="hljs-function"></span>&#123;<br>	data[i] = x;<br>&#125;<br><br><span class="hljs-function">Status <span class="hljs-title">Insert</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> x)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// write your code here</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=last;j&gt;=i;j--)<br>    &#123;<br>        data[j+<span class="hljs-number">1</span>]=data[j];<br>    &#125;<br>    data[i]=x;<br>    last++;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">output</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// write your code here</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;Length();i++)<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>, data[i]);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">condense</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// write your code here</span><br>    <span class="hljs-keyword">int</span> cnt=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;Length();i++)<br>    &#123;<br>        <span class="hljs-keyword">if</span>(data[i]!=<span class="hljs-number">0</span>)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(i!=cnt)<br>            &#123;<br>                data[cnt]=data[i];<br>                data[i]=<span class="hljs-number">0</span>;<br>            &#125;<br>            cnt++;<br>        &#125;<br>    &#125;<br>&#125;<br><span class="hljs-comment">//2 0 10 9 4 0 2 0 0 1</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">int</span> n,i,x;<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;n);<br><br>	<span class="hljs-keyword">for</span> (i=<span class="hljs-number">0</span>;i&lt;n;i++) &#123;<br>		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;x);<br>		Insert(i,x);<br>	&#125;<br>	condense();<br>	output();<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="4311"><a href="#4311" class="headerlink" title="4311"></a>4311</h4><p>双指针的经典应用</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAXSIZE 100</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> TRUE 1</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> FALSE 0</span><br><br><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> Status;<br><br><br><span class="hljs-keyword">int</span> data[MAXSIZE];<br><span class="hljs-keyword">int</span> last = <span class="hljs-number">-1</span>; <span class="hljs-comment">//当前表大小</span><br><br><span class="hljs-function"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> <span class="hljs-title">Length</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> last+<span class="hljs-number">1</span>;<br>&#125;<br><br><span class="hljs-function">Status <span class="hljs-title">Insert</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> x)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// write your code here</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=last;j&gt;=i;j--)<br>    &#123;<br>        data[j+<span class="hljs-number">1</span>]=data[j];<br>    &#125;<br>    data[i]=x;<br>    last++;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">output</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// write your code here</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;Length();i++)<br>    &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>, data[i]);<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">reverse</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// write your code here</span><br>    <span class="hljs-keyword">int</span> i,j;<br>    <span class="hljs-keyword">int</span> tmp;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>,j=last; i&lt;j; i++,j--)<br>    &#123;<br>        tmp=data[i];<br>        data[i]=data[j];<br>        data[j]=tmp;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">int</span> n,i,x;<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;n);<br><br>	<span class="hljs-keyword">for</span> (i=<span class="hljs-number">0</span>;i&lt;n;i++) &#123;<br>		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;x);<br>		Insert(i,x);<br>	&#125;<br>	output();<br>	reverse();<br>	output();<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="4877"><a href="#4877" class="headerlink" title="4877"></a>4877</h4><p>基础的增删查改的练习，但是需要辨别清楚i在0，1起点时不同的边界（debug了好久..）</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> defaultSize = <span class="hljs-number">10</span>;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SeqList</span> &#123;</span><br><span class="hljs-keyword">protected</span>:<br>    <span class="hljs-keyword">int</span> *data;<br>	<span class="hljs-keyword">int</span> maxSize; <span class="hljs-comment">//表最大可容纳项数</span><br>	<span class="hljs-keyword">int</span> last; <span class="hljs-comment">//当前表大小</span><br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">reSize</span><span class="hljs-params">(<span class="hljs-keyword">int</span> newSize)</span></span>; <span class="hljs-comment">//改变data数组空间大小</span><br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-built_in">SeqList</span>(<span class="hljs-keyword">int</span> sz = defaultSize);<br>	<span class="hljs-built_in">SeqList</span>(SeqList &amp;l);<br>	~<span class="hljs-built_in">SeqList</span>();<br>	<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">Size</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span>; <span class="hljs-comment">//计算表最大可容纳表项个数</span><br>	<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">Length</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span>; <span class="hljs-comment">//计算表长度</span><br>	<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">Search</span><span class="hljs-params">(<span class="hljs-keyword">int</span> &amp;x)</span> <span class="hljs-keyword">const</span></span>; <span class="hljs-comment">//搜索x在表中位置，函数返回表项序号</span><br>	<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">getData</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> &amp;x)</span> <span class="hljs-keyword">const</span></span>; <span class="hljs-comment">//取第i歌表项的值，存放在x中</span><br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setData</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> &amp;x)</span></span>; <span class="hljs-comment">//用x修改第i个表项的值</span><br>	<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Insert</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> &amp;x)</span></span>; <span class="hljs-comment">//插入x在第i歌表项之后</span><br>	<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Remove</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> &amp;x)</span></span>; <span class="hljs-comment">//删除第i歌表项，用x返回其值</span><br>	<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">()</span></span>; <span class="hljs-comment">//判断表是否空</span><br>	<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isFull</span><span class="hljs-params">()</span></span>; <span class="hljs-comment">//判断表是否满</span><br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">output</span><span class="hljs-params">()</span></span>; <span class="hljs-comment">// 输出顺序表</span><br>&#125;;<br><br><span class="hljs-comment">//write your code here</span><br>SeqList::<span class="hljs-built_in">SeqList</span>(<span class="hljs-keyword">int</span> sz)<br>&#123;<br>	<span class="hljs-keyword">if</span> (sz&gt;<span class="hljs-number">0</span>) &#123;<br>		maxSize = sz;<br>		last = <span class="hljs-number">-1</span>;<br>		data = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[maxSize];<br>		<span class="hljs-keyword">if</span> (data == <span class="hljs-literal">NULL</span>)<br>			<span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);<br>	&#125;<br>&#125;<br><br>SeqList::~<span class="hljs-built_in">SeqList</span>()<br>&#123;<br>	<span class="hljs-keyword">delete</span> []data;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">SeqList::Size</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> maxSize;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">SeqList::isFull</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span>(last==maxSize)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">SeqList::Length</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">return</span> last+<span class="hljs-number">1</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">SeqList::getData</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> &amp;x)</span> <span class="hljs-keyword">const</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">return</span> x=data[i<span class="hljs-number">-1</span>];<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SeqList::setData</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> &amp;x)</span></span><br><span class="hljs-function"></span>&#123;<br>	data[i<span class="hljs-number">-1</span>] = x;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">SeqList::Insert</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> &amp;x)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span> (last == maxSize<span class="hljs-number">-1</span>)<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	<span class="hljs-keyword">if</span> (i&lt;<span class="hljs-number">0</span>||i&gt;last+<span class="hljs-number">1</span>)<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	<span class="hljs-keyword">int</span> j;<br>	<span class="hljs-keyword">for</span> (j=last;j&gt;=i;j--)<br>		data[j+<span class="hljs-number">1</span>] = data[j];<br>	data[i] = x;<br>	last++;<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">SeqList::Remove</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> &amp;x)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">int</span> j;<br>	x=data[--i];<br>	<span class="hljs-keyword">for</span> (j=i;j&lt;=last<span class="hljs-number">-1</span>;j++)<br>		data[j] = data[j+<span class="hljs-number">1</span>];<br>	last--;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-comment">// the end</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SeqList::output</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">int</span> i;<br>	<span class="hljs-keyword">for</span> (i=<span class="hljs-number">0</span>;i&lt;=last;i++)<br>		cout &lt;&lt; data[i] &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;<br>	cout &lt;&lt; endl;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-function">SeqList <span class="hljs-title">l</span><span class="hljs-params">(<span class="hljs-number">8</span>)</span></span>;<br>	<span class="hljs-keyword">int</span> n,i,x;<br>	cin &gt;&gt; n;<br>	<span class="hljs-keyword">for</span> (i=<span class="hljs-number">0</span>;i&lt;n;i++) &#123;<br>		cin &gt;&gt; x;<br>		<span class="hljs-keyword">if</span> (l.<span class="hljs-built_in">isFull</span>())<br>			<span class="hljs-keyword">break</span>;<br>		l.<span class="hljs-built_in">Insert</span>(i,x);<br>	&#125;<br>	cout &lt;&lt; l.<span class="hljs-built_in">Size</span>() &lt;&lt; <span class="hljs-string">&quot; &quot;</span> &lt;&lt; l.<span class="hljs-built_in">Length</span>() &lt;&lt; endl;<br>	l.<span class="hljs-built_in">output</span>();<br>	l.<span class="hljs-built_in">Remove</span>(<span class="hljs-number">3</span>,n);<br>	l.<span class="hljs-built_in">setData</span>(<span class="hljs-number">2</span>,n);<br>	l.<span class="hljs-built_in">getData</span>(<span class="hljs-number">1</span>,n);<br>	cout &lt;&lt; n &lt;&lt; endl;<br>	l.<span class="hljs-built_in">output</span>();<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="4866-约瑟夫环问题"><a href="#4866-约瑟夫环问题" class="headerlink" title="4866(约瑟夫环问题)"></a>4866(约瑟夫环问题)</h4><p>本题比较重要，所以着重理解了一下（过程用注释标注）</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;malloc.h&gt;</span></span><br><br><span class="hljs-comment">/*利用链表实现*/</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">link</span>&#123;</span><br>    <span class="hljs-keyword">int</span> data;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">link</span> *<span class="hljs-title">next</span>;</span><br>&#125;link_s, *link_p;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">createList</span><span class="hljs-params">(link_p &amp;head, <span class="hljs-keyword">int</span> num)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (num &lt; <span class="hljs-number">1</span>)<br>    &#123;<br>        head = <span class="hljs-literal">NULL</span>;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br><br>    head = (link_p)<span class="hljs-built_in">malloc</span>(<span class="hljs-built_in"><span class="hljs-keyword">sizeof</span></span>(link_s));<br>    head-&gt;data = <span class="hljs-number">1</span>;<br>    head-&gt;next = <span class="hljs-literal">NULL</span>;<br><br>    link_p new_node = head;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>; i &lt; num+<span class="hljs-number">1</span>; i++)<br>    &#123;<br>        new_node-&gt;next = (link_p)<span class="hljs-built_in">malloc</span>(<span class="hljs-built_in"><span class="hljs-keyword">sizeof</span></span>(link_s));<br>        new_node = new_node-&gt;next;<br>        new_node-&gt;data = i;<br>        new_node-&gt;next = <span class="hljs-literal">NULL</span>;<br>    &#125;<br>    new_node-&gt;next = head;  <span class="hljs-comment">/*把最后一个节点指向头结点，构成循环链表*/</span><br><br>    <span class="hljs-keyword">return</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">output</span><span class="hljs-params">(link_p head)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;<br>    link_p p_node = head;<br>    <span class="hljs-keyword">while</span> (p_node &amp;&amp; i &lt; <span class="hljs-number">100</span>)<br>    &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d-&gt;&quot;</span>, p_node-&gt;data);<br>        p_node = p_node-&gt;next;<br>        i++;<br>    &#125;<br><br>    <span class="hljs-keyword">return</span>;<br>&#125;<br><br><span class="hljs-comment">/*实现功能从1至N开始顺序循环数数，每数到M输出该数值*/</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Josephus</span><span class="hljs-params">(link_p head, <span class="hljs-keyword">int</span> num)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>, remove_num = <span class="hljs-number">1</span>;<br>    link_p p_node = head;<br>    link_p p_temp = <span class="hljs-literal">NULL</span>;<br><br>    <span class="hljs-keyword">while</span> (p_node)<br>    &#123;<br>        <span class="hljs-keyword">if</span> (num - <span class="hljs-number">1</span> == i)<br>        &#123;<br>            <span class="hljs-keyword">if</span> (p_node == p_node-&gt;next) <span class="hljs-comment">/*剩下最后一个节点时，直接打印*/</span><br>            &#123;<br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>,  p_node-&gt;data);<br>                <span class="hljs-built_in">free</span>(p_node);<br>                p_node = <span class="hljs-literal">NULL</span>;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>            i = <span class="hljs-number">1</span>;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>,  p_node-&gt;next-&gt;data); <span class="hljs-comment">/*找到第M-1个节点,打印第M个节点*/</span><br>            p_temp = p_node-&gt;next-&gt;next;    <span class="hljs-comment">/*保存第M+1个节点地址*/</span><br>            <span class="hljs-built_in">free</span>(p_node-&gt;next);             <span class="hljs-comment">/*释放第M个节点地址*/</span><br>            p_node-&gt;next = p_temp;          <span class="hljs-comment">/*第M-1个节点指向第M+1个节点*/</span><br>            p_node= p_node-&gt;next;           <span class="hljs-comment">/*p_node指向第M+1个节点*/</span><br>            remove_num++;<br>        &#125;<br>        <span class="hljs-keyword">else</span><br>        &#123;<br>            i++;<br>            p_node = p_node-&gt;next;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> ;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">int</span> n = <span class="hljs-number">0</span>, m = <span class="hljs-number">0</span>;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d %d&quot;</span>, &amp;n, &amp;m);<br>    <span class="hljs-built_in">getchar</span>();<br><br>    link_p lk = <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-built_in">createList</span>(lk, n);<br>    <span class="hljs-built_in">Josephus</span>(lk, m);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/C/">C</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%94%90%E6%A0%BC/">锐格</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%93%BE%E8%A1%A8/">链表</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/792658f8.html">
+                        <span class="hidden-mobile">重打包APK绕过签名校验</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-copyright"></i> <a href="https://www.0error.net" target="_blank" rel="nofollow noopener"><span>Do1phln 2017 - 2021</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        陇ICP备2021000723号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=12345678"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+            
+            <span>申办中</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?bad56014d4869a580f4ebb27cf549354";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
